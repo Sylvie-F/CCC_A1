@@ -1,0 +1,44 @@
+Happiest Hour: 2021-12-31T13
+Happiest Day: 2021-08-01
+Most Active Hour: 2021-07-23T11
+Most Active Day: 2021-07-24
+Average Processing Time: 144.0034915 seconds
+Processing Times per Process: [134.003429, 132.566459, 136.148228, 136.038562, 153.893688, 153.219503, 153.433124, 152.724939]
+Communication Time: 19.902252 seconds
+Output Time: 0.004196 seconds
+
+real	2m36.028s
+user	8m38.273s
+sys	0m38.735s
+Job ID           : 57434678
+Cluster          : spartan
+User/Project     : zhifeic/comp90024
+Nodes            : 2
+Wall-clock time  : 00:02:37 / 00:30:00
+
+Displaying overall resources usage from 2024-03-23 20:35:10 to 2024-03-23 20:37:47:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm029 : 
+                CPU# 1    : 84.0   (  77.2 /   6.8 /   0.0 /  16.0 ) 
+                CPU# 2    : 87.0   (  80.4 /   6.6 /   0.0 /  13.0 ) 
+                CPU# 3    : 83.9   (  77.2 /   6.7 /   0.0 /  16.1 ) 
+                CPU# 4    : 81.4   (  75.0 /   6.4 /   0.0 /  18.6 ) 
+
+spartan-bm040 : 
+                CPU# 5    : 94.6   (  80.1 /  14.5 /   0.0 /   5.4 ) 
+                CPU# 6    : 94.6   (  80.2 /  14.3 /   0.0 /   5.4 ) 
+                CPU# 7    : 94.6   (  80.1 /  14.4 /   0.0 /   5.4 ) 
+                CPU# 8    : 94.7   (  80.1 /  14.6 /   0.0 /   5.3 ) 
+
+
+Allocated CPUs            : 8    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 8    
+
+Memory used (RAM)         : 1.7%  [559MB of 33555MB]
+
+--------------------------------------------
+
