@@ -47,7 +47,7 @@ end_position = (rank + 1) * each_bytes
 
 processing_start_time = datetime.datetime.now()
 
-with open('./twitter-100gb.json', 'r', encoding='utf-8') as twit_file:
+with open('./twitter-50mb.json', 'r', encoding='utf-8') as twit_file:
 
     twit_file.seek(begin_position)
 
