@@ -77,6 +77,9 @@ processing_end_time = datetime.datetime.now()
 processing_time = (processing_end_time - processing_start_time).total_seconds()
 result_list = comm.gather([happy_hour_dict, happy_day_dict, active_hour_dict, active_day_dict,processing_time], root=0)
 
+# wait for all processes
+comm.barrier()
+
 if rank == 0:
     # merge result list
     output_start_time = datetime.datetime.now()
