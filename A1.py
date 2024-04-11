@@ -1,6 +1,7 @@
 import re
 import os
 import datetime
+import math
 from mpi4py import MPI
 from collections import defaultdict
 from collections import Counter
@@ -41,7 +42,7 @@ def parse_info(line):
 
 
 total_bytes = os.path.getsize('./twitter-100gb.json')
-each_bytes = total_bytes // size
+each_bytes = math.ceil(total_bytes / size)
 begin_position = rank * each_bytes
 end_position = (rank + 1) * each_bytes
 
@@ -67,9 +68,8 @@ with open('./twitter-100gb.json', 'r', encoding='utf-8') as twit_file:
         happy_hour_dict[hour] += sentiment
         happy_day_dict[day] += sentiment
 
-        begin_position += len(twit.encode('utf-8'))
         # each process handle the line to the end
-        if begin_position >= end_position:
+        if twit_file.tell() >= end_position:
             break
 
 processing_end_time = datetime.datetime.now()
@@ -77,27 +77,30 @@ processing_end_time = datetime.datetime.now()
 processing_time = (processing_end_time - processing_start_time).total_seconds()
 result_list = comm.gather([happy_hour_dict, happy_day_dict, active_hour_dict, active_day_dict,processing_time], root=0)
 
-# wait for all processes
-comm.barrier()
-
 if rank == 0:
+    # collect result
+    result_happy_hour_dict = defaultdict(float)
+    result_happy_day_dict = defaultdict(float)
+    result_active_hour_dict = Counter()
+    result_active_day_dict = Counter()
+
     # merge result list
     output_start_time = datetime.datetime.now()
     for dict_list in result_list:
-        happy_hour_dict = merge(happy_hour_dict,dict_list[0])
-        happy_day_dict = merge(happy_day_dict,dict_list[1])
-        active_hour_dict.update(dict_list[2])
-        active_day_dict.update(dict_list[3])
+        result_happy_hour_dict = merge(result_happy_hour_dict,dict_list[0])
+        result_happy_day_dict = merge(result_happy_day_dict,dict_list[1])
+        result_active_hour_dict.update(dict_list[2])
+        result_active_day_dict.update(dict_list[3])
 
-    happiest_hour = max(happy_hour_dict, key=happy_hour_dict.get)
-    happiest_day = max(happy_day_dict, key=happy_day_dict.get)
-    most_active_hour = max(active_hour_dict, key=active_hour_dict.get)
-    most_active_day = max(active_day_dict, key=active_day_dict.get)
+    happiest_hour = max(result_happy_hour_dict, key=result_happy_hour_dict.get)
+    happiest_day = max(result_happy_day_dict, key=result_happy_day_dict.get)
+    most_active_hour = max(result_active_hour_dict, key=result_active_hour_dict.get)
+    most_active_day = max(result_active_day_dict, key=result_active_day_dict.get)
 
-    print(f"Happiest Hour: {happiest_hour}")
-    print(f"Happiest Day: {happiest_day}")
-    print(f"Most Active Hour: {most_active_hour}")
-    print(f"Most Active Day: {most_active_day}")
+    print(f"Happiest Hour: {happiest_hour} was the happiest hour with an overall sentiment score of {result_happy_hour_dict[happiest_hour]}")
+    print(f"Happiest Day: {happiest_day} was the happiest day with an overall sentiment score of {result_happy_day_dict[happiest_day]}")
+    print(f"Most Active Hour: {most_active_hour} had the most tweets(#{result_active_hour_dict[most_active_hour]})")
+    print(f"Most Active Day: {most_active_day} had the most tweets(#{result_active_day_dict[most_active_day]})")
 
     output_end_time = datetime.datetime.now()
     
