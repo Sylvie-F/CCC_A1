@@ -1,0 +1,36 @@
+Happiest Hour: 13:00-14:00 on 2021-12-31 was the happiest hour with an overall sentiment score of 3658.952143925703
+Happiest Day: 2021-12-31 was the happiest day with an overall sentiment score of 30402.26257142535
+Most Active Hour: 12:00-13:00 on 2022-05-21 had the most tweets(#39061)
+Most Active Day: 2022-05-21 had the most tweets(#424372)
+Average Parallel Processing Time: 2774.76298 seconds
+Max Parallel Processing Time: 2774.76298 seconds
+Parallel Processing Times per Process: [2774.76298]
+Output Calculation Time: 0.001986 seconds
+Total time: 2774.769817 seconds
+
+real	46m16.401s
+user	44m37.740s
+sys	1m23.490s
+Job ID           : 58264536
+Cluster          : spartan
+User/Project     : yaotwang/comp90024
+Nodes            : 1
+Wall-clock time  : 00:46:18 / 02:00:00
+
+Displaying overall resources usage from 2024-04-11 22:41:11 to 2024-04-11 23:27:29:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm175 : 
+                CPU# 1    : 99.6   (  96.1 /   3.5 /   0.0 /   0.4 ) 
+
+
+Allocated CPUs            : 1    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 1    
+
+Memory used (RAM)         : 3.4%  [141MB of 4195MB]
+
+--------------------------------------------
+
